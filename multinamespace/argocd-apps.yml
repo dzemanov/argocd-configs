@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app: multinamespace
+  name: guestbook-mutlinamespace
+  namespace: argocd
+spec:
+  destination:
+    namespace: ""
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+    - path: ./multinamespace/apps/staging/
+      repoURL: https://github.com/dzemanov/argocd-configs.git
+      targetRevision: main
+    - path: ./multinamespace/apps/production/
+      repoURL: https://github.com/dzemanov/argocd-configs.git
+      targetRevision: main
