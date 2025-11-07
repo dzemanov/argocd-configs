@@ -6,7 +6,7 @@ metadata:
   namespace: first
   labels:
     environment: development
-    app: nginx
+    app: nginx-multiinstance
     type: demo
 spec:
   replicas: 2
@@ -34,4 +34,4 @@ spec:
     - port: 80
       targetPort: 80
   selector:
-    app: nginx
+    app: nginx-multiinstance
