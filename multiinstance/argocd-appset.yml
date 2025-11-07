@@ -19,7 +19,7 @@ spec:
     metadata:
       name: "{{cluster}}-guestbook"
     spec:
-      project: my-project
+      project: default
       source:
         repoURL: https://github.com/dzemanov/argocd-configs.git
         targetRevision: HEAD
