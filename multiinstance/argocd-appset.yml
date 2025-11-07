@@ -17,7 +17,7 @@ spec:
             namespace: second
   template:
     metadata:
-      name: "{{.cluster}}-guestbook"
+      name: "{{cluster}}-guestbook"
     spec:
       project: my-project
       source:
