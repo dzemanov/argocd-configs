@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook-multicluster
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: in-cluster
+            url: https://kubernetes.default.svc
+            path: ./multiinstance/apps/first/
+            namespace: first
+          - cluster: second
+            url: https://api.zfmba-haxxh-jxp.m1qm.p3.openshiftapps.com:443
+            path: ./multiinstance/apps/second/
+            namespace: second
+  template:
+    metadata:
+      name: "{{.cluster}}-guestbook"
+    spec:
+      project: my-project
+      source:
+        repoURL: https://github.com/dzemanov/argocd-configs.git
+        targetRevision: HEAD
+        path: "{{path}}"
+      destination:
+        server: "{{url}}"
+        namespace: "{{namespace}}"
