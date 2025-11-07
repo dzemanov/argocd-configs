@@ -18,6 +18,8 @@ spec:
   template:
     metadata:
       name: "{{cluster}}-guestbook"
+      labels:
+        app: multiinstance
     spec:
       project: default
       source:
