@@ -11,9 +11,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   sources:
-    - path: ./multinamespace/apps/staging/
+    - path: ./multinamespace/apps/development/
       repoURL: https://github.com/dzemanov/argocd-configs.git
       targetRevision: main
-    - path: ./multinamespace/apps/production/
+    - path: ./multinamespace/apps/staging/
       repoURL: https://github.com/dzemanov/argocd-configs.git
       targetRevision: main
