@@ -3,7 +3,7 @@ kind: Application
 metadata:
   labels:
     app: multinamespace
-  name: guestbook-mutlinamespace
+  name: guestbook-multinamespace
   namespace: argocd
 spec:
   destination:
