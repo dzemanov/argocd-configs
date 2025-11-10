@@ -1,0 +1,26 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: redhat-argocd-app-multinamespace
+  annotations:
+    argocd/instance-name: rhtap
+    argocd/app-selector: "app=multinamespace" # format: `label.key=label.value`
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
+  system: examples
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: redhat-argocd-app-multiinstance
+  annotations:
+    argocd/instance-name: rhtap
+    argocd/app-selector: "app=multiinstance" # format: `label.key=label.value`
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
+  system: examples
