@@ -19,28 +19,32 @@ spec:
         app: nginx
     spec:
       securityContext:
-        runAsNonRoot: true
         runAsUser: 101
+        runAsGroup: 101
         fsGroup: 101
+      initContainers:
+      - name: init-nginx
+        image: nginx:1.14.2
+        command: ['sh', '-c', 'mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/uwsgi_temp /var/cache/nginx/scgi_temp /var/log/nginx && chmod -R 755 /var/cache/nginx /var/log/nginx']
+        volumeMounts:
+        - name: nginx-cache
+          mountPath: /var/cache/nginx
+        - name: nginx-log
+          mountPath: /var/log/nginx
       containers:
       - name: nginx
-        image: nginx:1.25-alpine
+        image: nginx:1.14.2
         ports:
-        - containerPort: 8080
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
+        - containerPort: 80
         volumeMounts:
-        - name: cache
+        - name: nginx-cache
           mountPath: /var/cache/nginx
-        - name: run
-          mountPath: /var/run
+        - name: nginx-log
+          mountPath: /var/log/nginx
       volumes:
-      - name: cache
+      - name: nginx-cache
         emptyDir: {}
-      - name: run
+      - name: nginx-log
         emptyDir: {}
 ---
 apiVersion: v1
@@ -51,6 +55,6 @@ metadata:
 spec:
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 80
   selector:
     app: nginx
