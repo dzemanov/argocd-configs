@@ -1,6 +1,6 @@
 {
   containerPort: 80,
-  image: "gcr.io/heptio-images/ks-guestbook-demo:0.2",
+  image: "gcr.io/google-samples/gb-frontend:v5",
   name: "jsonnet-guestbook-ui",
   namespace: "demo-apps",
   replicas: 1,
